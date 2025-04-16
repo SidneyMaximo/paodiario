@@ -1,0 +1,127 @@
+/* Estilo do corpo */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: url('../src/imagens/bg-obpc.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo translúcido */
+    box-sizing: border-box;
+}
+
+/* Estilo dos versículos */
+.verse {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+}
+
+.reference {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+/* Botões */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #212121;
+    color: #f5f5f5;
+    width: 100%;
+    max-width: 200px;
+    transition: all 0.3s ease;
+}
+
+#copy:hover, #share:hover, #reflection:hover {
+    background-color: #333333;
+}
+
+/* Redes sociais */
+.redes-sociais {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.redes-sociais img {
+    width: 40px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.redes-sociais img:hover {
+    transform: scale(1.1);
+}
+
+/* Rodapé */
+.rodape {
+    margin-top: 2rem;
+    text-align: center;
+    color: #ffffff;
+    padding: 1rem;
+}
+
+.church-info {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    text-align: center;
+    color: #ffffff;
+}
+
+.church-info:last-child {
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 600px) {
+    .verse {
+        font-size: 1.2rem;
+    }
+    .reference {
+        font-size: 1rem;
+    }
+    button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .verse {
+        font-size: 1.8rem;
+        max-width: 800px;
+    }
+    .reference {
+        font-size: 1.4rem;
+    }
+}

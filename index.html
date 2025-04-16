@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Versículo bíblico diário da Igreja O Brasil Para Cristo">
+    <title>Versículo Bíblico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: url('./src/imagens/bg-obpc.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            text-align: center;
+            min-height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo translúcido */
+            box-sizing: border-box;
+        }
+        .verse {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+        .reference {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #212121;
+            color: #f5f5f5;
+            width: 100%;
+            max-width: 200px;
+            transition: all 0.3s ease;
+        }
+        #copy:hover, #share:hover, #reflection:hover {
+            background-color: #333333;
+        }
+        .redes-sociais {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .redes-sociais img {
+            width: 40px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        .redes-sociais img:hover {
+            transform: scale(1.1);
+        }
+        .rodape {
+            margin-top: 2rem;
+            text-align: center;
+            color: #ffffff;
+            padding: 1rem;
+        }
+        .church-info {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            text-align: center;
+            color: #ffffff;
+        }
+        .church-info:last-child {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries para responsividade */
+        @media (max-width: 600px) {
+            .verse {
+                font-size: 1.2rem;
+            }
+            .reference {
+                font-size: 1rem;
+            }
+            button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .verse {
+                font-size: 1.8rem;
+                max-width: 800px;
+            }
+            .reference {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="verse" id="verse">Carregando versículo...</div>
+        <div class="reference" id="reference"></div>
+        <div class="buttons">
+            <button id="copy">COPIAR</button>
+            <button id="share">COMPARTILHAR</button>
+            <button id="reflection" style="display: none;">VER REFLEXÃO</button>
+        </div>
+        
+        <div class="church-info">
+            Igreja o brasil para cristo
+        </div>
+      
+        <div class="church-info">
+            Loteamento 3 amigos - Tabuleiro do Pinto - Rio Largo
+        </div>
+
+        <footer class="rodape">
+            <p>Siga nossa igreja nas redes sociais</p>
+            <ul class="redes-sociais"> 
+                <li>
+                    <a href="https://www.instagram.com/obpcriolargo?igsh=MXFlamV2em9tYjkycw==" target="_blank" rel="noopener noreferrer">
+                        <img src="./src/imagens/intagram.png" alt="Instagram">
+                    </a>
+                </li>
+            </ul>
+        </footer>
+    </div>
+
+    <script>
+        //Json dos versículos
+        const verses = [
+            {
+                index: 1,
+                reflection: "URL",
+                text: "A saber: Se, com a tua boca, confessares ao Senhor Jesus e, em teu coração, creres que Deus o ressuscitou dos mortos, serás salvo.",
+                reference: "Romanos 10:9",
+            },
+            {
+                index: 2,
+                reflection: "URL",
+                text: "Há caminho que ao homem parece direito, mas o fim dele são os caminhos da morte.",
+                reference: "Provérbios 14:12",
+            },            
+            {
+                index: 3,
+                reflection: "URL",
+                text: "O Senhor é o meu pastor, nada me faltará.",
+                reference: "Salmos 23:1"
+            },
+            {        
+                index: 4,
+                reflection: "URL",
+        text: "O Senhor te abençoe e te guarde; o Senhor faça resplandecer o seu rosto sobre ti e te conceda graça.",
+        reference: "Números 6:24-25"
+    },
+    {
+        index: 5,
+        reflection: "URL",
+        text: "O Senhor é a minha luz e a minha salvação; de quem terei medo?",
+        reference: "Salmos 27:1"
+    },
+    {
+        index: 6,
+        reflection: "URL",
+        text: "Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.",
+        reference: "Provérbios 3:5"
+    },
+    {
+        index: 7,
+        reflection: "URL",
+        text: "Bem-aventurados os que choram, porque serão consolados.",
+        reference: "Mateus 5:4"
+    },
+    {
+        index: 8,
+        reflection: "URL",
+        text: "O amor é paciente, o amor é bondoso.",
+        reference: "1 Coríntios 13:4"
+    },
+    {
+        index: 9,
+        reflection: "URL",
+        text: "Clama a mim, e responder-te-ei e anunciar-te-ei coisas grandes e firmes que não sabes.",
+        reference: "Jeremias 33:3"
+    },
+    {
+        index: 10,
+        reflection: "URL",
+        text: "Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia.",
+        reference: "Salmos 46:1"
+    },
+    {
+        index: 10,
+        reflection: "URL",
+        text: "Mas em todas estas coisas somos mais do que vencedores, por aquele que nos amou.",
+        reference: "Romanos 8:37"
+    },
+    {
+        index: 11,
+        reflection: "URL",
+        text: "Pois estou convencido de que nem morte nem vida, nem anjos nem demônios, nem o presente nem o futuro, nem quaisquer poderes, nem altura nem profundidade, nem qualquer outra coisa na criação será capaz de nos separar do amor de Deus que está em Cristo Jesus, nosso Senhor.",
+        reference: "Romanos 8:38-39"
+    },
+    {
+        index: 12,
+        reflection: "URL",
+        text: "Venham a mim, todos os que estão cansados e sobrecarregados, e eu darei descanso a vocês.",
+        reference: "Mateus 11:28"
+    },
+    {
+        index: 13,
+        reflection: "URL",
+        text: "Sabemos que Deus age em todas as coisas para o bem daqueles que o amam, dos que foram chamados de acordo com o seu propósito.",
+        reference: "Romanos 8:28"
+    },
+    {
+        index: 14,
+        reflection: "URL",
+        text: "Ele dá força ao cansado e aumenta o vigor do que está sem forças.",
+        reference: "Isaías 40:29"
+    },
+    {
+        index: 15,
+        reflection: "URL",
+        text: "O Senhor dos Exércitos está conosco; o Deus de Jacó é o nosso refúgio.",
+        reference: "Salmos 46:7"
+    },
+    {
+        index: 16,
+        reflection: "URL",
+        text: "A tua palavra é lâmpada para os meus pés e luz para o meu caminho.",
+        reference: "Salmos 119:105"
+    },
+    {
+        index: 17,
+        reflection: "URL",
+        text: "Pois tu és a minha rocha e a minha fortaleza; por amor do teu nome, guia-me e encaminha-me.",
+        reference: "Salmos 31:3"
+    },
+    {
+        index: 18,
+        reflection: "URL",
+        text: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro.",
+        reference: "Jeremias 29:11"
+    },
+    {
+        index: 19,
+        reflection: "URL",
+        text: "A minha alma se gloriará no Senhor; os mansos o ouvirão e se alegrarão.",
+        reference: "Salmos 34:2"
+    },
+    {
+        index: 20,
+        reflection: "URL",
+        text: "O Senhor é bom, um refúgio em tempos de angústia. Ele protege os que nele confiam.",
+        reference: "Naum 1:7"
+
+            }
+            // ... (todos os outros versículos permanecem iguais)
+            // Removi a duplicação para manter o código mais limpo aqui
+            // No seu arquivo real, mantenha todos os versículos
+        ];
+
+        function getRandomVerse() {
+            const randomIndex = Math.floor(Math.random() * verses.length);
+            return verses[randomIndex];
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const verseElement = document.getElementById('verse');
+            const referenceElement = document.getElementById('reference');
+            const reflectionButton = document.getElementById('reflection');
+
+            function displayRandomVerse() {
+                const verse = getRandomVerse();
+                verseElement.textContent = verse.text;
+                referenceElement.textContent = verse.reference;
+
+                if (verse.reflection && isValidUrl(verse.reflection)) {
+                    reflectionButton.style.display = 'block';
+                    reflectionButton.onclick = () => window.open(verse.reflection, '_blank');
+                } else {
+                    reflectionButton.style.display = 'none';
+                }
+            }
+
+            // Mostrar um versículo aleatório ao carregar
+            displayRandomVerse();
+
+            // Opcional: Botão para mostrar outro versículo
+            // Você pode adicionar um botão "Novo Versículo" se quiser
+        });
+
+        document.getElementById('copy').addEventListener('click', () => {
+            const verseText = document.getElementById('verse').textContent;
+            const referenceText = document.getElementById('reference').textContent;
+            const textToCopy = `${verseText} - ${referenceText}`;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    alert("Versículo copiado!");
+                }).catch(() => {
+                    fallbackCopy(textToCopy);
+                });
+            } else {
+                fallbackCopy(textToCopy);
+            }
+        });
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';  // Evitar rolagem para o fundo no iOS
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                alert("Versículo copiado!");
+            } catch (err) {
+                alert("Erro ao copiar o versículo.");
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        document.getElementById('share').addEventListener('click', () => {
+            const verseText = document.getElementById('verse').textContent;
+            const referenceText = document.getElementById('reference').textContent;
+            const textToShare = `${verseText} - ${referenceText}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Versículo Bíblico',
+                    text: textToShare,
+                }).catch((error) => {
+                    console.log('Erro ao compartilhar:', error);
+                });
+            } else {
+                // Fallback para navegadores sem suporte a Web Share API
+                const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textToShare)}`;
+                window.open(shareUrl, '_blank');
+            }
+        });
+
+        function isValidUrl(url) {
+            if (!url || url === "URL") return false;
+            try {
+                new URL(url);
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+    </script>
+    <script src="./js/script.js"></script>
+</body>
+</html>
