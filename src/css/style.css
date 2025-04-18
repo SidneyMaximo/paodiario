@@ -42,6 +42,7 @@ body {
     align-items: center;
     width: 100%;
     max-width: 300px;
+    
 }
 
 button {
@@ -58,9 +59,21 @@ button {
     transition: all 0.3s ease;
 }
 
-#copy:hover, #share:hover, #reflection:hover {
-    background-color: #333333;
+#reflection {
+    display: none;
 }
+
+#copy:hover, #share:hover, #reflection:hover {
+    gap: 1.5rem;    
+    font-size: 0.6rem; 
+    background-color: #333333;   
+    footer {
+    text-align: center;
+    padding: 1rem;
+    }
+}
+<button id="copy" aria-label="Copiar versículo">COPIAR</button>
+<button id="share" aria-label="Compartilhar versículo">COMPARTILHAR</button>
 
 /* Redes sociais */
 .redes-sociais {
